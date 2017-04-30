@@ -1,0 +1,33 @@
+/* You can add global styles to this file, and also import other style files */
+$dark-blue:#29c6f1;
+$light-blue:#9bdaf5;
+$light-green: #d1e611;
+$dark-green: #9ed641;
+$orange: #ff8511;
+$pink: #dc0e91;
+
+
+html,body{
+    font-family: squirrel;
+    height: 100%;
+}
+
+@font-face {
+    font-family: 'squirrel'; /*a name to be used later*/
+    src: url('./assets/CherryCreamSoda.ttf'); /*URL to font*/
+}
+
+.actionButton{
+    width:120px;
+    height: 40px;
+    background-color: $dark-green;
+    font-family: squirrel;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+    border-width: 0;
+    // border-color:$light-blue;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px #888888;
+
+}

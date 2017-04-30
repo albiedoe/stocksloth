@@ -1,0 +1,43 @@
+@import "../../base.scss";
+
+#WelcomeBox{
+    display: flex;
+    flex-direction: column;
+    flex:1;
+    align-content: center;
+    justify-content: center;
+    min-height: 100%;
+    min-width: 100%;
+    text-align: center;
+
+    h1{
+        color:$dark-green;
+    }
+    h2{
+        color:$dark-blue;
+    }
+}
+
+#WelcomeContent{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-content: center;
+    justify-content: center;
+
+}
+
+#UnderSpace{
+    display: flex;
+    flex-grow: 2;
+    flex:2;
+    min-height: 100%;
+    min-width: 100%;
+}
+
+#Wrapper{
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    min-width: 100%;
+}
