@@ -9,15 +9,21 @@ import { UserService } from '../services/user.service';
 })
 export class SignUpComponent {
     signUp = "Sign down";
+    users: any;
+    
     constructor(private _userService: UserService){
-
+        this._userService.AddUser()
+                .subscribe(res => {
+                    this.users = res.json();
+                      console.log(res.json());
+                  }
+            );
     }
 
     submitSignUp(){
         this._userService.AddUser()
                   .subscribe(res => {
-                        debugger   
-                      console.log(res);
+                      console.log(res._body);
                   }
                   );
     }

@@ -18,11 +18,18 @@ router.get('/', (req, res) => {
   res.send('api works');
 });
 
-router.post('/quotes', (req, res, next) => {
-  debugger
-  console.log("received.");
-  console.log(req.body);
+router.get('/users', (req, res) => {
+        MongoClient.connect(url, function(err, db) {
+            db.collection('users', function(err, collection) {
+                collection.find().toArray(function(err, results) {
+                    res.json(results);
+            })
+        });
+    });
+});
 
+router.post('/quotes', (req, res, next) => {
+  
     MongoClient.connect(url, function(err, db) {
         var col = db.collection('createIndexExample1');
         console.log(col.count());
