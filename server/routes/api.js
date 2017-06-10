@@ -1,9 +1,14 @@
 const express = require('express');
 var cors = require('express-cors');
 const MongoClient = require('mongodb').MongoClient;
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema,
+    ObjectId = Schema.ObjectId;
 
 // Connection URL
 var url = 'mongodb://127.0.0.1:27017/stockSloth';
+
+mongoose.connect(url);
 
 const router = express.Router();
 router.all('*', cors({
@@ -12,6 +17,10 @@ router.all('*', cors({
     ]
 }));
 
+var userSchema = new Schema({
+  id: { type: String },
+  name: { type: String }
+});
 
 /* GET api listing. */
 router.get('/', (req, res) => {
@@ -28,41 +37,46 @@ router.get('/users', (req, res) => {
     });
 });
 
-router.post('/quotes', (req, res, next) => {
-  
-    MongoClient.connect(url, function(err, db) {
-        var col = db.collection('createIndexExample1');
-        console.log(col.count());
+router.get('/user/:id', (req, res) => {
+    var id = req.params.id;
 
-        db.close();
+    var userModel = mongoose.model('user', userSchema);
+    console.log(id);
+    userModel.findOne({ '_id': id }, {}, function (err, user) {
+    if (err) return handleError(err);
+        res.json(user);
     });
-//   MongoClient.connect('mongodb://127.0.0.1:27017/stockSloth', (err, database) => {
-//     // Set our internal DB variable
-
-//     // Get our form values. These rely on the "name" attributes
-//     var userName = req.body.username;
-//     var userEmail = req.body.useremail;
-//     // Set our collection
-//     var collection = database.get('usercollection');
-
-//     collection.insert({
-//         "username" : userName,
-//         "email" : userEmail
-//     }, function (err, doc) {
-//         if (err) {
-//             // If it failed, return error
-//             res.send("There was a problem adding the information to the database.");
-//         }
-//         else {
-//             // And forward to success page
-//             res.redirect("userlist");
-//         }
-//     });
-// });
-
-  console.log("fin");
-        res.body = "hi";
-        res.send("hi from the server");
 });
+
+router.get('/api', (req, res) => {
+    var id = req.params.id;
+
+    var userModel = mongoose.model('user', userSchema);
+    console.log(id);
+    userModel.findOne({ '_id': id }, {}, function (err, user) {
+    if (err) return handleError(err);
+        res.json(user);
+    });
+});
+
+var path = require('path'),
+    fs = require('fs');
+router.post('/upload', function (req, res) {
+    var tempPath = req.files.file.path,
+        targetPath = path.resolve('./uploads/image.png');
+    if (path.extname(req.files.file.name).toLowerCase() === '.png') {
+        fs.rename(tempPath, targetPath, function(err) {
+            if (err) throw err;
+            console.log("Upload completed!");
+        });
+    } else {
+        fs.unlink(tempPath, function () {
+            if (err) throw err;
+            console.error("Only .png files are allowed!");
+        });
+    }
+    // ...
+});
+
 
 module.exports = router;

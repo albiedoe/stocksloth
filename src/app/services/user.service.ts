@@ -6,6 +6,7 @@ import {Observable} from 'rxjs/Rx';
 export class UserService {
 
   url:string = "http://localhost:3000/api/users";
+  url_getUser:string = "http://localhost:3000/api/user/";
   // url:string = "http://httpbin.org/post";
 
   constructor(private _http: Http) {
@@ -18,6 +19,12 @@ export class UserService {
 
   GetAllUsers():Observable<any>{
     return this._http.get(this.url)
+            .map((res:Response) => res)
+            .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+  GetUser(id: string){
+    return this._http.get(this.url_getUser + id)
             .map((res:Response) => res)
             .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
   }

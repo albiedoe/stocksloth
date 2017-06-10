@@ -1,0 +1,15 @@
+
+<p> User Page</p>
+
+{{user.name}}
+
+{{id}}
+
+<form method="post" enctype="multipart/form-data" action="/upload">
+    <input type="file" name="file" (change)="fileEvent($event)">
+    <input type="submit" value="Submit">
+</form>
+<!--
+<div *ngFor="let pic in pics">
+{{pic.description}}
+</div>-->

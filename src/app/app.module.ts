@@ -7,12 +7,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { SignUpComponent } from './signup/signup.component';
+import { UserDetailComponent } from './userDetail/userDetail.component';
 
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'signup', component: SignUpComponent }//,
-  // { path: 'hero/:id',      component: HeroDetailComponent },
+  { path: 'signup', component: SignUpComponent },
+  { path: 'user/:id', component: UserDetailComponent },
   // {
   //   path: 'heroes',
   //   component: HeroListComponent,
@@ -30,7 +31,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     HomeComponent,
-    SignUpComponent
+    SignUpComponent,
+    UserDetailComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
