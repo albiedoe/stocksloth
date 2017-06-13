@@ -2,18 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '../models/user.model';
 import { UserService } from '../services/user.service';
+import { PhotoService } from '../services/photo.service';
 
 @Component({
   selector: 'user',
   templateUrl: './userDetail.component.html',
   styleUrls: ['./userDetail.component.scss'],
-  providers: [UserService]
+  providers: [UserService, PhotoService]
 })
 
 export class UserDetailComponent implements OnInit {
     id: string;
     private sub: any;
     user: User = new User();
+    uploadFile: File;
+    response = "no res";
 
     ngOnInit(): void {
         this.sub = this.route.params.subscribe(params => {
@@ -27,12 +30,21 @@ export class UserDetailComponent implements OnInit {
         });
     }
 
-    constructor(private route: ActivatedRoute, private _userService: UserService){
+    constructor(private route: ActivatedRoute, private _userService: UserService, private _photoService: PhotoService){
     }
 
     fileEvent(fileInput: any){
-        let file = fileInput.target.files[0];
-        let fileName = file.name;
-        console.log(file);
+        this.uploadFile = fileInput.target.files[0];
+        let fileName = this.uploadFile.name;
+    }
+
+    pushPhoto(){
+        var s = this.uploadFile;
+        this._photoService.AddPhoto(this.id, this.uploadFile);
+        // .subscribe(res => {
+        //             console.log("return");
+        //               console.log(res.json());
+        //           });
+
     }
 }

@@ -5,10 +5,10 @@
 
 {{id}}
 
-<form method="post" enctype="multipart/form-data" action="/upload">
-    <input type="file" name="file" (change)="fileEvent($event)">
-    <input type="submit" value="Submit">
-</form>
+<input type="file" name="file" (change)="fileEvent($event)">
+<input type="submit" value="Add!" (click)="pushPhoto()" >
+
+{{response}}
 <!--
 <div *ngFor="let pic in pics">
 {{pic.description}}
